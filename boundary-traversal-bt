@@ -1,0 +1,82 @@
+
+class Solution
+{
+  void leftnode(Node node,ArrayList <Integer> leftans){
+        if(node==null){
+           // ArrayList <Integer> temp=new ArrayList();
+            return ;
+        }
+        
+if(node.right==null && node.left==null){
+    return ;
+}
+    leftans.add(node.data);
+    if(node.left!=null){
+        leftnode(node.left,leftans);
+    }
+    else{
+        leftnode(node.right,leftans);
+    }
+        
+    }
+void leafnode(Node node,ArrayList <Integer> leafnodes){
+    if(node==null){
+        return;
+    }
+    
+    if(node.left==null && node.right==null){
+        leafnodes.add(node.data);
+        return;
+    }
+    
+    
+leafnode(node.left,leafnodes);
+leafnode(node.right,leafnodes);
+    
+}
+
+
+
+ void rightnode(Node node,ArrayList <Integer> rightans){
+        if(node==null){
+           // ArrayList <Integer> temp=new ArrayList();
+            return ;
+        }
+        
+if(node.right==null && node.left==null){
+    return ;
+}
+  
+    if(node.right!=null){
+       rightnode(node.right,rightans);
+    }
+    else{
+       rightnode(node.left,rightans);
+    }
+      rightans.add(node.data);
+        
+    }
+    
+	ArrayList <Integer> boundary(Node node)
+	{
+	    ArrayList<Integer> ans=new ArrayList<Integer>();
+	    if(node.left==null && node.right==null){
+	        ans.add(node.data);
+	        return ans;
+	    }
+	    ArrayList<Integer> leftans=new ArrayList<Integer>(); 
+	 leftnode(node.left,leftans);
+	   
+	    ArrayList <Integer> leafnodes=new ArrayList<Integer>();
+	   leafnode(node,leafnodes);
+	    
+	     ArrayList <Integer> rightans=new ArrayList<Integer>();
+	    rightnode(node.right,rightans); 
+	    ans.add(node.data);
+	    ans.addAll(leftans);
+	    ans.addAll(leafnodes);
+	   ans.addAll(rightans);
+	    
+	    return ans;
+	}
+}
