@@ -1,0 +1,37 @@
+class Tree
+{
+   static int md=0;
+  public void traversal(HashMap<Integer,ArrayList<Integer>> map,int d,Node root){
+      if(root==null){
+          return;
+      }
+      if(d>md){
+          md=d;
+      }
+      if(map.containsKey(d)==false){
+          map.put(d,new ArrayList<Integer>());
+      }
+      map.get(d).add(root.data);
+      
+      traversal(map,d+1,root.left);
+      traversal(map,d,root.right);
+  }
+     public ArrayList<Integer> diagonal(Node root)
+      {
+          ArrayList<Integer> ans=new ArrayList<>();
+          HashMap<Integer,ArrayList<Integer>> map =new HashMap<>();
+          traversal(map,0,root);
+          
+          for(int x=0;x<=md;x++){
+              ArrayList<Integer> temp=map.get(x);
+              if(temp==null){
+                  continue;
+              }
+              for(int m:temp){
+                  ans.add(m);
+              }
+          }
+          return ans;
+          
+      }
+}
