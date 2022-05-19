@@ -1,0 +1,38 @@
+ public int size(TreeNode root){
+        if(root==null){
+            return 0;
+        }
+        return 1+size(root.left)+size(root.right);
+    }
+    public TreeNode get(TreeNode node,int x){
+        if(node==null){
+            return null;
+        }
+        if(node.val==x){
+            return node;
+        }
+        TreeNode left=get(node.left,x);
+        if(left!=null){
+            return left;
+        }
+        
+        return get(node.right,x);
+        
+    }
+    public boolean btreeGameWinningMove(TreeNode root, int n, int x) {
+        
+        TreeNode curr=get(root,x);
+        int right=size(curr.left);
+        int left=size(curr.right);
+      //  int stotal=size(root);
+        int m=n-right-left-1;
+        
+        int max=Math.max(right,Math.max(left,m));
+     
+        
+        if(max>n/2){
+            return true;
+        }
+        return false;
+        
+    }
