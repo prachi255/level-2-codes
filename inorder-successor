@@ -1,0 +1,38 @@
+	public Node inorderSuccessor(Node root,Node x)
+         {
+             boolean found=false;
+    Node curr=root;
+    while(curr!=null){
+        if(curr.left==null){
+            if(found==true){
+                return curr;
+            }
+            if(x==curr){
+                found=true;
+            }
+            curr=curr.right;
+        }
+        else{
+        Node iop=curr.left;
+        while(iop.right!=null && iop.right!=curr){
+            iop=iop.right;
+        }
+        if(iop.right==null){
+            iop.right=curr;
+            curr=curr.left;
+        }
+        else{
+           if(found==true){
+                return curr;
+            }
+            if(x==curr){
+                found=true;
+            }
+            iop.right=null;
+            //data
+            curr=curr.right;
+        }
+        }
+    }
+    return null;
+         }
