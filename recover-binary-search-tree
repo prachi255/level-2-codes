@@ -1,0 +1,50 @@
+   public void recoverTree(TreeNode root) {
+         TreeNode curr=root;
+        TreeNode n1=null;
+        TreeNode n2=null;
+        TreeNode prev=null;
+        while(curr!=null){
+            if(curr.left==null){
+                if(prev!=null && prev.val>curr.val){
+                if(n1==null){
+                    n1=prev;
+                    n2=curr;
+                }
+                else{
+                    n2=curr;
+                }
+                }
+                prev=curr;
+                curr=curr.right;
+            }
+            else{
+                TreeNode iop=curr.left;
+                while(iop.right!=null && iop.right!=curr){
+                    iop=iop.right;
+                }
+                
+                if(iop.right==null){
+                    iop.right=curr;
+                    curr=curr.left;
+                }
+                else{
+                    iop.right=null;
+                   if(prev!=null && prev.val>curr.val){
+                if(n1==null){
+                    n1=prev;
+                    n2=curr;
+                }
+                else{
+                    n2=curr;
+                }
+                }
+                    prev=curr;
+                    curr=curr.right;
+                }
+                
+            }
+        }
+        int t=n1.val;
+        n1.val=n2.val;
+        n2.val=t;
+    }
