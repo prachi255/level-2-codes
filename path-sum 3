@@ -1,0 +1,44 @@
+int count=0;
+    public int pathSum(TreeNode root, int targetSum) {
+        if(root==null){
+            return 0;
+        }
+        HashMap<Integer,Integer> map=new HashMap<>();
+      map.put(0,1);
+    helper(map,root,targetSum,root.val);
+        return count;
+        
+    }
+   
+    
+    public void helper(HashMap<Integer,Integer> map,TreeNode root,int target,int curr){
+   //base case
+        if(map.containsKey(curr-target)==true){
+            count+=map.get(curr-target);
+        }
+        
+        //putting values in hashmap
+        if(map.containsKey(curr)==false){
+            map.put(curr,1);
+        }
+        else{
+            map.put(curr,map.get(curr)+1);
+        }
+        
+        //callls
+        if(root.left!=null){
+            helper(map,root.left,target,curr+root.left.val);
+        }
+         if(root.right!=null){
+            helper(map,root.right,target,curr+root.right.val);
+        }
+        
+        //deleteing added values in map
+        if(map.get(curr)==1){
+            map.remove(curr);
+        }
+        else{
+            map.put(curr,map.get(curr)-1);
+        }
+        
+    }
