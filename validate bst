@@ -1,0 +1,34 @@
+class Pair{
+    boolean isBst=true;
+long max=Long.MIN_VALUE;
+    long min=Long.MAX_VALUE;
+    
+}
+    public boolean isValidBST(TreeNode root) {
+      
+         Pair rp=helper(root);
+        return rp.isBst;
+    }
+    public Pair helper(TreeNode node){
+        if(node==null){
+            return new Pair();
+        }
+        
+        //calls
+        
+        Pair left=helper(node.left);
+        Pair right=helper(node.right);
+        
+        Pair curr=new Pair();
+        curr.min=Math.min(node.val,Math.min(left.min,right.min));
+        curr.max=Math.max(node.val,Math.max(left.max,right.max));
+        curr.isBst=node.val>left.max && node.val<right.min && left.isBst==true && right.isBst==true;
+      
+        
+    
+        
+        return curr;
+        
+        
+        
+    }
