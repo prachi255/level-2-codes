@@ -1,0 +1,21 @@
+  static int minDiff(Node  root, int K) 
+    { 
+        // Write your code here
+        if(root==null){
+            return Integer.MAX_VALUE;
+        }
+        
+        if(K>root.data){
+            int curr=Math.abs(root.data-K);
+            int ansRight=minDiff(root.right,K);
+            return Math.min(curr,ansRight);
+        }
+        else if(K<root.data){
+              int curr=Math.abs(root.data-K);
+            int ansLeft=minDiff(root.left,K);
+            return Math.min(curr,ansLeft);
+        }
+        else{
+            return 0;
+        }
+    } 
