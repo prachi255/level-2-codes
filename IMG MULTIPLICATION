@@ -1,0 +1,27 @@
+ long sum=0;
+     long mod=1000000007;
+     public void mul(Node p, Node q) {
+      
+        if(p==null || q==null){
+            return;
+        }
+        
+    
+            sum+=(p.data*q.data)%mod;
+        
+        
+        
+     mul(p.left,q.right);
+    mul(p.right,q.left);
+        
+    }
+   
+    public long imgMultiply(Node root)
+    {
+          if(root==null){
+            return sum;
+        }
+ mul(root.left,root.right);
+        
+  return (sum+(root.data*root.data))%mod;
+    }
