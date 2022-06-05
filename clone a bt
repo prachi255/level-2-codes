@@ -1,0 +1,58 @@
+class Solution{
+    public Tree cloneTree(Tree tree){
+      createDup(tree);
+      setRandoms(tree);
+      
+      return removeDup(tree);
+      
+     }
+     public void createDup(Tree tree){
+         if(tree==null){
+             return ;
+         }
+         
+         
+         createDup(tree.left);
+         createDup(tree.right);
+         
+         Tree dup=new Tree(tree.data);
+//dup.data=tree.data;
+         dup.left=tree.left;
+         tree.left=dup;
+         
+         
+         }
+     
+     public void setRandoms(Tree tree){
+         if(tree==null){
+             return;
+         }
+         
+         setRandoms(tree.left.left);
+         setRandoms(tree.right);
+         
+         if(tree.random!=null){
+             tree.left.random=tree.random.left;
+         }
+         
+     }
+     
+     public Tree removeDup(Tree tree){
+         if(tree==null){
+             return null;
+         }
+         
+         Tree leftDup=removeDup(tree.left.left);
+         Tree rightDup=removeDup(tree.right);
+         
+         
+         //postorder work
+         Tree dup=tree.left;
+         tree.left=dup.left;
+         dup.left=leftDup;
+         dup.right=rightDup;
+         return dup;
+         
+         
+     }
+}
