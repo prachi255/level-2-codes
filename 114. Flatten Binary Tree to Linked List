@@ -1,0 +1,57 @@
+    public class pair{
+        TreeNode head;
+        TreeNode tail;
+        pair(){
+           
+        }
+        pair(TreeNode h,TreeNode t){
+            this.head=h;
+            this.tail=t;
+        }
+    }
+    public void flatten(TreeNode root) {
+        if(root!=null){
+            helper(root);
+        }
+        
+        
+    }
+    public pair helper(TreeNode root){
+        if(root.left!=null && root.right!=null){
+            pair lp=helper(root.left);
+            pair rp=helper(root.right);
+            
+            pair np=new pair();
+            np.head=root;
+            np.head.left=null;
+            np.head.right=lp.head;
+            lp.tail.right=rp.head;
+            np.tail=rp.tail;
+            
+            return np;
+        }
+        else if(root.left!=null){
+             pair lp=helper(root.left);
+            pair np=new pair();
+              np.head=root;
+            np.head.left=null;
+            np.head.right=lp.head;
+            np.tail=lp.tail;
+            return np;
+        }
+        
+        else if(root.right!=null){
+            pair rp=helper(root.right);
+            pair np=new pair();
+              np.head=root;
+            np.head.left=null;
+            
+            np.head.right=rp.head;
+            np.tail=rp.tail;
+            return np;
+        }
+        
+        else{
+            return new pair(root,root);
+        }
+    }
