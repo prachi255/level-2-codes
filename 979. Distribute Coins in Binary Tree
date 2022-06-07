@@ -1,0 +1,26 @@
+  class pair{
+        int nodes;
+        int coins;
+      
+    }
+    int ans=0;
+    public int distributeCoins(TreeNode root) {
+        helper(root);
+        return ans;
+    }
+    public pair helper(TreeNode root){
+        if(root==null){
+            return new pair();
+        }
+        
+        pair lp=helper(root.left);
+        pair rp=helper(root.right);
+        
+        pair curr=new pair();
+        curr.nodes=1+lp.nodes+rp.nodes;
+        curr.coins=lp.coins+rp.coins+root.val;
+        
+        ans+=Math.abs(curr.coins-curr.nodes);
+        
+        return curr;
+    }
