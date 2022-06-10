@@ -1,0 +1,43 @@
+	boolean flag1;
+		boolean flag2;
+	Node lca(Node root, int n1,int n2)
+	{
+	flag1=false;
+	flag2=false;
+	Node ans=	helper(root,n1,n2);
+	if(flag1==true && flag2==true){
+	    return ans;
+	}
+	return null;
+	}
+	Node helper(Node root,int n1,int n2){
+	    if(root==null){
+	        return null;
+	    }
+	    
+	    Node left=helper(root.left,n1,n2);
+	    Node right=helper(root.right,n1,n2);
+	    
+	    if(root.data==n1){
+	        flag1=true;
+	        return root;
+	    }
+	    else if(root.data==n2){
+	        flag2=true;
+	        return root;
+	    }
+	    
+	   else if(left!=null && right!=null){
+	        return root;
+	    }
+	    else if(left!=null){
+	        return left;
+	    }
+	    else if(right!=null){
+	        return right;
+	    }
+	    else{
+	        return null;
+	    }
+	    
+	}
